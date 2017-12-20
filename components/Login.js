@@ -8,6 +8,9 @@ var { width, height } = Dimensions.get('window');
 
 import {Button,Header,Input,Card,CardSection} from './common';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
 import { connect } from 'react-redux';
 import reducers from '../reducer';
 import actions from '../action';
@@ -16,7 +19,8 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableHighlight
   } from 'react-native';
 
 class Login extends Component{
@@ -29,6 +33,8 @@ class Login extends Component{
             password:"",
             loading:false
         }
+
+        this.onLoginClick = this.onLoginClick.bind(this);
 
         
     }
@@ -71,15 +77,16 @@ class Login extends Component{
               return value;
       }
     
-    }
+    };
 
    onLoginClick(){
        console.log("On Login Click", this.props);
-  }  
+  }  ;
 
     render(){
        console.log(this.props.username, this.props.password,this.props.loading);
         return(
+            <KeyboardAwareScrollView>
             <View style={styles.container}>
                 <Header
                     headerText='Login Form'
@@ -100,9 +107,10 @@ class Login extends Component{
                     onChangeText={(text)=>this.onChangeText('1',text)}
                     value={this.state.password}
                 />
+                
                 <View style={{flex:0.6,flexDirection:'column',justifyContent:'space-between',alignItems:'center'}}>
                 <Button
-                    onPress={this.onLoginClick()}
+                    onPress={this.onLoginClick}
                 >
                     <Text>Login </Text>
                 </Button>
@@ -118,11 +126,17 @@ class Login extends Component{
                 </Button>
                 </View>
                 <View style={[styles.overlay, { height: 60}]}>
-                    <View style={styles.childView } />
+                    <TouchableHighlight 
+                    style={styles.childView}
+                    onPress={()=>console.log("on press")}
+                    >
+                        <Text>Press </Text>
+                    </TouchableHighlight>
                     <View style={styles.childView } />
                     <View style={styles.childView } />
                 </View>
             </View>
+            </KeyboardAwareScrollView>
         );
     }
 
@@ -141,9 +155,9 @@ const styles = StyleSheet.create({
     overlay: {
         flex: 1,
         flexDirection:'row',
-        position: 'absolute',
+        position: 'relative',
         left: 0,
-        top: 20,
+        top: 100,
         opacity: 0.5,
         backgroundColor: 'black',
         width: width,
