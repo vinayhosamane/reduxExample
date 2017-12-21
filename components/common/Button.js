@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
+import PropTypes from 'prop-types';
+
 const Button = ({ onPress, children }) => {
   const { buttonStyle, textStyle } = styles;
  
@@ -36,5 +38,9 @@ const styles = {
     alignItems:'center',
   }
 };
+
+// Button.PropTypes = {
+//   onPress = PropTypes.func.isRequired
+// };
 
 export { Button };

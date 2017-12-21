@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+//import PropTypes from 'prop-types';
 
 var Dimensions = require('Dimensions');
 
@@ -31,16 +32,18 @@ class Login extends Component{
         this.state = {
             username:"",
             password:"",
-            loading:false
+            loading:this.props.passingProps,
         }
 
         this.onLoginClick = this.onLoginClick.bind(this);
 
+        this.onUpdate =this.props.onUpdate;
+
         
     }
 
-    componentWillReceiveProps(nextprops){
-        console.log(nextprops);
+    componentWillReceiveProps(nextprops,nextState){
+        console.log(nextprops,nextState);
     }
 
   onChangeText = (id,value)=>{
@@ -81,6 +84,7 @@ class Login extends Component{
 
    onLoginClick(){
        console.log("On Login Click", this.props);
+       this.onUpdate();
   }  ;
 
     render(){
