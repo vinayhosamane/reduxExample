@@ -14,7 +14,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { connect } from 'react-redux';
 import reducers from '../reducer';
-import actions from '../action';
+import {typePassword,typeUsername,loginClicked} from '../action';
 
 import {
     Platform,
@@ -55,13 +55,8 @@ class Login extends Component{
                       username: value
                   });
               }
-               this.props.dispatch(
-                 {
-                     type:'TYPE_USERNAME',
-                     username:value
-                 }
-               );
-
+             this.props.dispatchUserName(value);
+            
               return this.state.username
           case "1":
               {
@@ -69,12 +64,8 @@ class Login extends Component{
                       password: value
                   });
               }
-              this.props.dispatch(
-                {
-                    type:'TYPE_PASSWORD',
-                    password:value
-                }
-              );
+            this.props.dispatchPassword(value);
+              
               return this.state.password
           default:
               return value;
@@ -84,11 +75,14 @@ class Login extends Component{
 
    onLoginClick(){
        console.log("On Login Click", this.props);
-       this.onUpdate();
+       //this.onUpdate();
+       this.props.dispatchLogin(this.props.username,this.props.password);
+       
   }  ;
 
     render(){
        console.log(this.props.username, this.props.password,this.props.loading);
+       
         return(
             <KeyboardAwareScrollView>
             <View style={styles.container}>
@@ -128,6 +122,12 @@ class Login extends Component{
                 >
                     <Text>Github </Text>
                 </Button>
+                {
+                 (this.props.loading===true) && 
+                     <Header
+                    headerText='Loaing...'
+                />
+                }
                 </View>
                 <View style={[styles.overlay, { height: 60}]}>
                     <TouchableHighlight 
@@ -188,11 +188,19 @@ const styles = StyleSheet.create({
       };
  };
 
-//  const mapDispatchToProps = (dispatch) => {
-//     return {
-//        //bindActionCreators(actions,dispatch);
-//     }
-// };
+ const mapDispatchToProps = (dispatch) => {
+    return {
+      dispatchUserName:(value)=>dispatch(
+          typeUsername(value)
+      ),
+      dispatchPassword:(value)=>dispatch(
+          typePassword(value)
+      ),
+      dispatchLogin:(usr,psw)=>dispatch(
+          loginClicked(usr,psw)
+      )
+    }
+};
  
  
-export default connect(mapStateToProps, actions)(Login);
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

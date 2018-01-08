@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "devtools": "react-devtools",
-    "test": "jest"
+    "test": "jest",
+    "reduxdebug": "open 'redux-devtools-extension'"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
@@ -22,7 +23,8 @@
     "babel-jest": "21.2.0",
     "babel-preset-react-native": "4.0.0",
     "jest": "21.2.1",
-    "react-test-renderer": "16.0.0"
+    "react-test-renderer": "16.0.0",
+    "redux-devtools-extension": "^2.13.2"
   },
   "jest": {
     "preset": "react-native"

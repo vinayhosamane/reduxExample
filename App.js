@@ -14,12 +14,14 @@ import {
 } from 'react-native';
 
 import Login from './components/Login.js';
-import { Provider } from 'react-redux';
-import reducers from './reducer';
+// import { Provider } from 'react-redux';
+// import reducers from './reducer';
 
-import { createStore, compose, composeEnhancers,applyMiddleware } from 'redux';
+// import { createStore, compose, composeEnhancers,applyMiddleware } from 'redux';
 
-import logger from 'redux-logger';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+
+// import logger from 'redux-logger';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -49,16 +51,29 @@ export default class App extends Component {
   }
 
   render() {
-    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const enhancer = composeEnhancers();
-    const store = createStore(reducers, enhancer,applyMiddleware(logger));
+    // const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    // const enhancer = composeEnhancers();
+ 
+    // const composeEnhancers =
+    // typeof window === 'object' &&
+    // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    //   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    //     // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    //   }) : compose;
+  
+  // const enhancer = composeEnhancers(
+  //   applyMiddleware(logger),
+  //   // other store enhancers if any
+  // );
+
+   // const store = createStore(reducers,enhancer);
     return (
-      <Provider store={store}>
+     
         <Login 
         passingProps={this.state.testing}
         onUpdate = {this.onUpdate}
         />
-       </Provider>
+      
     );
   }
 }

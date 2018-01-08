@@ -24,6 +24,12 @@ export const userReducer = (state = defaultState, action) => {
         loading: false,
         password: action.password
     });
+      case 'LOGIN_CLICKED':
+      return Object.assign({}, state,{
+        username:action.username,
+        password:action.password,
+        loading:true
+      });
       default:
         return state;
     }
